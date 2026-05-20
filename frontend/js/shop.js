@@ -114,7 +114,7 @@
     grid.querySelectorAll('.btn-add-cart:not(:disabled)').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const product = allProducts.find(p => p.id === parseInt(btn.dataset.id, 10));
+        const product = allProducts.find(p => String(p.id) === btn.dataset.id);
         if (product) Cart.add(product);
       });
     });
@@ -123,19 +123,19 @@
     grid.querySelectorAll('.btn-view-detail').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        openProductModal(parseInt(btn.dataset.id, 10));
+        openProductModal(btn.dataset.id);
       });
     });
 
     // Card click
     grid.querySelectorAll('.product-card').forEach(card => {
-      card.addEventListener('click', () => openProductModal(parseInt(card.dataset.id, 10)));
+      card.addEventListener('click', () => openProductModal(card.dataset.id));
     });
   }
 
   /* ── Product detail modal ─────────────────────────────────────── */
   function openProductModal(productId) {
-    const product = allProducts.find(p => p.id === productId);
+    const product = allProducts.find(p => String(p.id) === String(productId));
     if (!product) return;
 
     let modal = document.getElementById('product-modal-backdrop');

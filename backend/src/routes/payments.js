@@ -110,14 +110,18 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
     order.payment.statusDetail = status_detail;
 
     if (status === 'approved') {
+      if (order.status === 'approved') {
+        logger.info(`Webhook duplicado ignorado: order ${order._id} ya fue aprobada.`);
+        return;
+      }
       order.status = 'approved';
 
-      // Decrease stock
+      // Decrease stock (floor at 0 to avoid negative values)
       for (const item of order.items) {
         if (item.productId) {
           await Product.findOneAndUpdate(
             { _id: item.productId },
-            { $inc: { stock: -item.quantity } }
+            [{ $set: { stock: { $max: [0, { $subtract: ['$stock', item.quantity] }] } } }]
           ).catch(() => {});
         }
       }

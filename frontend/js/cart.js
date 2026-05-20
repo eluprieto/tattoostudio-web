@@ -30,7 +30,7 @@
     getTotal() { return items.reduce((acc, i) => acc + i.price * i.qty, 0); },
 
     add(product, qty = 1) {
-      const existing = items.find(i => i.id === product.id);
+      const existing = items.find(i => String(i.id) === String(product.id));
       if (existing) {
         existing.qty = Math.min(existing.qty + qty, product.stock || 99);
       } else {
@@ -41,12 +41,12 @@
     },
 
     remove(productId) {
-      items = items.filter(i => i.id !== productId);
+      items = items.filter(i => String(i.id) !== String(productId));
       saveCart();
     },
 
     updateQty(productId, qty) {
-      const item = items.find(i => i.id === productId);
+      const item = items.find(i => String(i.id) === String(productId));
       if (!item) return;
       if (qty <= 0) { this.remove(productId); return; }
       item.qty = Math.min(qty, item.stock || 99);
@@ -153,8 +153,8 @@
     // Qty / remove event delegation
     listEl.querySelectorAll('.cart-item-qty-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const id  = parseInt(btn.dataset.id, 10);
-        const cur = Cart.getItems().find(i => i.id === id)?.qty || 0;
+        const id  = btn.dataset.id;
+        const cur = Cart.getItems().find(i => String(i.id) === id)?.qty || 0;
         Cart.updateQty(id, btn.dataset.action === 'inc' ? cur + 1 : cur - 1);
         renderSidebar();
         updateBadge();
@@ -162,7 +162,7 @@
     });
     listEl.querySelectorAll('.cart-item-remove').forEach(btn => {
       btn.addEventListener('click', () => {
-        Cart.remove(parseInt(btn.dataset.id, 10));
+        Cart.remove(btn.dataset.id);
         renderSidebar();
         updateBadge();
       });
