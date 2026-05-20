@@ -2,7 +2,9 @@
    TATTOOSTUDIO – UTILS
    ================================================================ */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = (['localhost', '127.0.0.1'].includes(location.hostname))
+  ? 'http://localhost:3000/api'
+  : 'https://tattoostudio-web.onrender.com/api';
 
 const Utils = {
   /* Format price in ARS */
