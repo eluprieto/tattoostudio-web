@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TattooStudio – Arte que dura toda la vida. Tatuajes, piercings y aritos en Buenos Aires." />
+  <title>TattooStudio | Arte que dura toda la vida</title>
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/shop.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ===================== INTRO OVERLAY ===================== -->
+  <div id="intro-overlay" class="intro-overlay" aria-hidden="true">
+    <div class="intro-logo-wrap">
+      <svg class="intro-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle class="intro-ring" cx="100" cy="100" r="90" fill="none" stroke="#c9a84c" stroke-width="1.5" />
+        <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" class="intro-text-main">TATTOO</text>
+        <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" class="intro-text-sub">STUDIO</text>
+        <line class="intro-divider" x1="40" y1="100" x2="160" y2="100" stroke="#c9a84c" stroke-width="0.8" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Inicio">
+        <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+          <text x="0" y="36" class="logo-text-main">TATTOO</text>
+          <text x="2" y="48" class="logo-text-sub">STUDIO</text>
+        </svg>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+        <li><a href="#precios" class="nav-link">Precios</a></li>
+        <li><a href="#galeria" class="nav-link">Galería</a></li>
+        <li><a href="pages/shop.html" class="nav-link">Tienda</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="pages/shop.html" class="cart-btn" id="cart-icon-btn" aria-label="Ver carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="icon-svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a href="pages/login.html" class="btn-outline-gold btn-sm" id="auth-btn">Ingresar</a>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menú móvil">
+      <button class="drawer-close" id="drawer-close" aria-label="Cerrar menú">&times;</button>
+      <ul class="drawer-links" role="list">
+        <li><a href="#inicio" class="drawer-link">Inicio</a></li>
+        <li><a href="#servicios" class="drawer-link">Servicios</a></li>
+        <li><a href="#nosotros" class="drawer-link">Nosotros</a></li>
+        <li><a href="#precios" class="drawer-link">Precios</a></li>
+        <li><a href="#galeria" class="drawer-link">Galería</a></li>
+        <li><a href="pages/shop.html" class="drawer-link">Tienda</a></li>
+        <li><a href="pages/login.html" class="drawer-link">Ingresar</a></li>
+      </ul>
+    </div>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="inicio" class="hero">
+    <!--
+      Imágenes flotantes de fondo.
+      Variables por elemento:
+        --x / --y     → posición absoluta dentro del hero
+        --size        → ancho (alto proporcional)
+        --opacity     → transparencia (0.15–0.40)
+        --dur         → duración del ciclo de flotación
+        --delay       → delay de inicio (desfase entre imágenes)
+        data-parallax → velocidad del efecto scroll (0.10–0.25)
+    -->
+    <!--
+      Grilla 3×6: columna izquierda (x 2-12%), centro (x 35-58%), derecha (x 75-88%)
+      Centro opacidad baja (0.30-0.40) para no tapar el texto.
+      data-depth: profundidad mouse (0.2=lejos, 0.65=cerca).
+    -->
+    <div class="hero-bg-images" id="hero-bg-images" aria-hidden="true">
+      <!--
+        Grilla 4 col × 5 filas. Celdas bloqueadas: cols 2-3 · filas 2-3
+        (zona del texto hero). Offset manual ±2-3% para evitar aspecto
+        de cuadrícula perfecta. 16 iconos en total.
+
+        Col centers : 12.5% · 37.5% · 62.5% · 87.5%
+        Row centers : 10%   · 30%   · 50%   · 70%   · 90%
+      -->
+
+      <!-- FILA 1 · todas las columnas ────────────────── -->
+      <div class="hfi-wrap" data-parallax="0.22" data-depth="0.65"
+           style="--x:5%;--y:3%;--size:155px;--opacity:0.70;--dur:7.5s;--delay:0s">
+        <img class="hfi" src="assets/hero/skull.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.20" data-depth="0.58"
+           style="--x:29%;--y:2%;--size:152px;--opacity:0.60;--dur:9.5s;--delay:1.8s">
+        <img class="hfi" src="assets/hero/compass.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.19" data-depth="0.55"
+           style="--x:57%;--y:4%;--size:150px;--opacity:0.58;--dur:8.8s;--delay:3.2s">
+        <img class="hfi" src="assets/hero/anchor.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.22" data-depth="0.62"
+           style="--x:83%;--y:2%;--size:155px;--opacity:0.70;--dur:7.2s;--delay:1.4s">
+        <img class="hfi" src="assets/hero/tattoo-machine.png" alt="" />
+      </div>
+
+      <!-- FILA 2 · solo cols 1 y 4 (cols 2-3 bloqueadas: zona del texto) -->
+      <div class="hfi-wrap" data-parallax="0.16" data-depth="0.55"
+           style="--x:4%;--y:23%;--size:158px;--opacity:0.68;--dur:8.5s;--delay:0.5s">
+        <img class="hfi" src="assets/hero/heart.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.17" data-depth="0.52"
+           style="--x:82%;--y:21%;--size:152px;--opacity:0.68;--dur:8.8s;--delay:3.5s">
+        <img class="hfi" src="assets/hero/rose.png" alt="" />
+      </div>
+
+      <!-- FILA 3 · solo cols 1 y 4 (cols 2-3 bloqueadas: zona del texto) -->
+      <div class="hfi-wrap" data-parallax="0.13" data-depth="0.46"
+           style="--x:6%;--y:43%;--size:153px;--opacity:0.65;--dur:9.0s;--delay:2.4s">
+        <img class="hfi" src="assets/hero/dagger.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.14" data-depth="0.50"
+           style="--x:81%;--y:41%;--size:150px;--opacity:0.65;--dur:8.0s;--delay:5.0s">
+        <img class="hfi" src="assets/hero/snake.png" alt="" />
+      </div>
+
+      <!-- FILA 4 · todas las columnas ────────────────── -->
+      <div class="hfi-wrap" data-parallax="0.12" data-depth="0.42"
+           style="--x:3%;--y:63%;--size:155px;--opacity:0.62;--dur:8.6s;--delay:1.6s">
+        <img class="hfi" src="assets/hero/arrows.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.12" data-depth="0.36"
+           style="--x:30%;--y:65%;--size:150px;--opacity:0.48;--dur:9.2s;--delay:4.0s">
+        <img class="hfi" src="assets/hero/skull.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.13" data-depth="0.38"
+           style="--x:58%;--y:63%;--size:152px;--opacity:0.48;--dur:8.0s;--delay:2.2s">
+        <img class="hfi" src="assets/hero/compass.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.14" data-depth="0.42"
+           style="--x:83%;--y:62%;--size:155px;--opacity:0.62;--dur:7.6s;--delay:0.8s">
+        <img class="hfi" src="assets/hero/anchor.png" alt="" />
+      </div>
+
+      <!-- FILA 5 · todas las columnas ────────────────── -->
+      <div class="hfi-wrap" data-parallax="0.11" data-depth="0.38"
+           style="--x:6%;--y:83%;--size:150px;--opacity:0.60;--dur:9.0s;--delay:2.8s">
+        <img class="hfi" src="assets/hero/tattoo-machine.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.11" data-depth="0.34"
+           style="--x:31%;--y:85%;--size:153px;--opacity:0.50;--dur:7.8s;--delay:4.5s">
+        <img class="hfi" src="assets/hero/heart.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.12" data-depth="0.35"
+           style="--x:57%;--y:83%;--size:152px;--opacity:0.50;--dur:8.4s;--delay:1.2s">
+        <img class="hfi" src="assets/hero/rose.png" alt="" />
+      </div>
+      <div class="hfi-wrap" data-parallax="0.13" data-depth="0.40"
+           style="--x:84%;--y:85%;--size:155px;--opacity:0.60;--dur:7.4s;--delay:3.8s">
+        <img class="hfi" src="assets/hero/dagger.png" alt="" />
+      </div>
+
+    </div>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Buenos Aires · Est. 2015</p>
+      <h1 class="hero-title">Arte que dura<br /><em>toda la vida</em></h1>
+      <p class="hero-subtitle">Tatuajes personalizados, piercings y aritos de alta calidad.<br />Cada marca cuenta una historia.</p>
+      <div class="hero-ctas">
+        <a href="#galeria" class="btn-gold">Ver trabajos</a>
+        <a href="https://wa.me/5491100000000?text=Hola,%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener" class="btn-outline-gold">Reservar turno</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section id="servicios" class="section services-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Lo que hacemos</p>
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="ornament" aria-hidden="true"></div>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 8 L52 52 L8 52 Z" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <circle cx="30" cy="32" r="8" fill="none" stroke="#c9a84c" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Tatuajes Personalizados</h3>
+          <p class="service-desc">Diseños únicos creados especialmente para vos. Trabajamos tu idea desde boceto hasta tinta.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="40" height="40" fill="#1a1a1a" stroke="#c9a84c" stroke-width="1.5"/>
+              <path d="M20 20 L40 40 M40 20 L20 40" stroke="#c9a84c" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Blackwork</h3>
+          <p class="service-desc">Geometría, mandalas, dotwork y patrones tribales en tinta negra pura y contrastes marcados.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="20" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <circle cx="30" cy="30" r="8" fill="#c9a84c" opacity="0.3"/>
+              <circle cx="30" cy="30" r="3" fill="#c9a84c"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Tatuajes en Color</h3>
+          <p class="service-desc">Composiciones vibrantes con técnicas de acuarela, neo-tradicional o realismo a color.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 10 C30 10 50 30 30 50 C10 30 30 10 30 10Z" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <circle cx="30" cy="28" r="4" fill="none" stroke="#c9a84c" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Piercings y Aritos</h3>
+          <p class="service-desc">Perforaciones seguras con materiales de primera calidad: titanio, acero quirúrgico y oro.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 50 Q30 10 50 50" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <circle cx="30" cy="28" r="6" fill="none" stroke="#c9a84c" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Retoques</h3>
+          <p class="service-desc">Revivimos tatuajes antiguos o terminamos de perfeccionar los detalles de tus piezas favoritas.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="12" y="12" width="36" height="36" rx="4" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+              <path d="M20 35 L28 22 L36 32 L42 26" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Cover-Up</h3>
+          <p class="service-desc">Transformamos tatuajes que ya no te gustan en nuevas obras de arte con técnicas especializadas.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE NOSOTROS ===================== -->
+  <section id="nosotros" class="section about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p class="section-eyebrow">Nuestra historia</p>
+          <h2 class="section-title">Arte con alma,<br /><em>tinta con propósito</em></h2>
+          <p class="about-body">Desde 2015 llevamos más de <strong>+3.000 tatuajes</strong> realizados y una reputación construida sobre un principio simple: cada pieza que hacemos es única, pensada y ejecutada con absoluta dedicación.</p>
+          <p class="about-body">Nuestro estudio combina un ambiente íntimo y cuidado con técnicas de vanguardia. No hacemos tatuajes en serie. Cada cliente es una historia nueva que merece su propio capítulo.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number" data-count="3000">0</span>
+              <span class="stat-label">Tatuajes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="9">0</span>
+              <span class="stat-label">Años de experiencia</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="98">0</span>
+              <span class="stat-label">% Clientes satisfechos</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual reveal-right">
+          <div class="about-img-wrap">
+            <img src="assets/gallery/about-placeholder.jpg" alt="Interior del estudio de tatuajes" loading="lazy" class="about-img" onerror="this.style.display='none'" />
+            <div class="about-img-placeholder">
+              <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" class="about-placeholder-svg">
+                <rect width="300" height="400" fill="#111"/>
+                <circle cx="150" cy="160" r="80" fill="none" stroke="#c9a84c" stroke-width="1"/>
+                <path d="M110 160 C110 130 190 130 190 160 C190 200 150 230 150 230 C150 230 110 200 110 160Z" fill="none" stroke="#c9a84c" stroke-width="1.2"/>
+                <text x="150" y="310" text-anchor="middle" fill="#a89880" font-size="14" font-family="Inter">FOTO DEL ESTUDIO</text>
+                <text x="150" y="330" text-anchor="middle" fill="#3a2f1e" font-size="11" font-family="Inter">Reemplazar con imagen real</text>
+              </svg>
+            </div>
+            <div class="about-badge">
+              <span>Est.</span>
+              <strong>2015</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRECIOS ===================== -->
+  <section id="precios" class="section pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Inversión</p>
+        <h2 class="section-title">Precios Orientativos</h2>
+        <div class="ornament" aria-hidden="true"></div>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div class="pricing-icon">🖋</div>
+          <h3 class="pricing-title">Tatuajes</h3>
+          <ul class="pricing-list">
+            <li><span>Por hora de trabajo</span><strong>$15.000</strong></li>
+            <li><span>Pequeño (hasta 5cm)</span><strong>$8.000+</strong></li>
+            <li><span>Mediano (5–15cm)</span><strong>$20.000+</strong></li>
+            <li><span>Grande (15–30cm)</span><strong>$45.000+</strong></li>
+            <li><span>Manga completa</span><strong>Consultar</strong></li>
+          </ul>
+        </div>
+
+        <div class="pricing-card pricing-featured reveal">
+          <div class="pricing-badge">Más elegido</div>
+          <div class="pricing-icon">💎</div>
+          <h3 class="pricing-title">Piercings</h3>
+          <ul class="pricing-list">
+            <li><span>Lóbulo simple</span><strong>$3.500</strong></li>
+            <li><span>Helix / Tragus</span><strong>$5.000</strong></li>
+            <li><span>Septum</span><strong>$6.000</strong></li>
+            <li><span>Labio / Ceja</span><strong>$5.500</strong></li>
+            <li><span>Ombligo</span><strong>$6.500</strong></li>
+          </ul>
+        </div>
+
+        <div class="pricing-card reveal">
+          <div class="pricing-icon">✨</div>
+          <h3 class="pricing-title">Servicios extra</h3>
+          <ul class="pricing-list">
+            <li><span>Retoque (1 año)</span><strong>Gratis</strong></li>
+            <li><span>Retoque (después)</span><strong>$4.000</strong></li>
+            <li><span>Cover-up</span><strong>Consultar</strong></li>
+            <li><span>Boceto personalizado</span><strong>Incluido</strong></li>
+            <li><span>Consulta previa</span><strong>Gratis</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="pricing-disclaimer">
+        * Los precios son orientativos. El precio final se define según diseño, tamaño, complejidad y zona del cuerpo.
+        <a href="https://wa.me/5491100000000" target="_blank" rel="noopener" class="link-gold">Consultanos sin compromiso.</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== GALERÍA ===================== -->
+  <section id="galeria" class="section gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Portfolio</p>
+        <h2 class="section-title">Nuestros Trabajos</h2>
+        <div class="ornament" aria-hidden="true"></div>
+      </div>
+
+      <div class="gallery-filters" role="group" aria-label="Filtros de galería">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="blackwork">Blackwork</button>
+        <button class="filter-btn" data-filter="color">Color</button>
+        <button class="filter-btn" data-filter="realismo">Realismo</button>
+        <button class="filter-btn" data-filter="tradicional">Tradicional</button>
+        <button class="filter-btn" data-filter="minimalista">Minimalista</button>
+        <button class="filter-btn" data-filter="piercings">Piercings</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Generado por gallery.js -->
+      </div>
+
+      <div class="gallery-load-more">
+        <button class="btn-outline-gold" id="load-more-btn">Ver más trabajos</button>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Anterior">&#8249;</button>
+      <button class="lightbox-next" id="lightbox-next" aria-label="Siguiente">&#8250;</button>
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="" />
+        <div class="lightbox-info">
+          <h4 id="lightbox-title"></h4>
+          <p id="lightbox-desc"></p>
+        </div>
+      </div>
+      <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    </div>
+  </section>
+
+  <!-- ===================== TIENDA PREVIEW ===================== -->
+  <section id="tienda" class="section shop-preview-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Tienda online</p>
+        <h2 class="section-title">Aritos &amp; Piercings</h2>
+        <div class="ornament" aria-hidden="true"></div>
+      </div>
+      <p class="shop-preview-desc">Explorá nuestra colección de aritos y piercings de alta calidad. Acero quirúrgico, titanio y más.</p>
+      <a href="pages/shop.html" class="btn-gold">Ver tienda completa</a>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACTO / CTA ===================== -->
+  <section id="contacto" class="section contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <p class="section-eyebrow">Contacto</p>
+          <h2 class="section-title">¿Listo para tu<br /><em>próximo tatuaje?</em></h2>
+          <div class="contact-items">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div>
+                <strong>Dirección</strong>
+                <p>Av. Corrientes 1234, CABA, Buenos Aires</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div>
+                <strong>Teléfono / WhatsApp</strong>
+                <p><a href="https://wa.me/5491100000000" target="_blank" rel="noopener" class="link-gold">+54 9 11 0000-0000</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <div>
+                <strong>Email</strong>
+                <p><a href="mailto:info@tattoostudio.com" class="link-gold">info@tattoostudio.com</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div>
+                <strong>Horarios</strong>
+                <p>Lun–Vie: 10:00–20:00<br />Sáb: 11:00–18:00<br />Dom: Cerrado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal-right" id="contact-form" novalidate>
+          <h3 class="form-title">Envianos un mensaje</h3>
+          <div class="form-group">
+            <label for="cf-name">Nombre completo</label>
+            <input type="text" id="cf-name" name="name" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="cf-service">Servicio de interés</label>
+            <select id="cf-service" name="service">
+              <option value="">Seleccionar...</option>
+              <option>Tatuaje personalizado</option>
+              <option>Blackwork</option>
+              <option>Tatuaje en color</option>
+              <option>Piercing</option>
+              <option>Retoque</option>
+              <option>Cover-up</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Mensaje</label>
+            <textarea id="cf-message" name="message" rows="4" placeholder="Contanos sobre tu idea..." required></textarea>
+          </div>
+          <button type="submit" class="btn-gold btn-full">Enviar mensaje</button>
+          <p class="form-success" id="form-success" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo" aria-label="Inicio">
+            <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+              <text x="0" y="36" class="logo-text-main">TATTOO</text>
+              <text x="2" y="48" class="logo-text-sub">STUDIO</text>
+            </svg>
+          </a>
+          <p class="footer-desc">Arte que dura toda la vida. Estudio de tatuajes y piercings en Buenos Aires desde 2015.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="TikTok" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.81a8.2 8.2 0 004.79 1.52V6.88a4.85 4.85 0 01-1.02-.19z"/></svg>
+            </a>
+            <a href="https://wa.me/5491100000000" class="social-link" aria-label="WhatsApp" rel="noopener" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Facebook" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-nav">
+          <h4 class="footer-heading">Navegación</h4>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="pages/shop.html">Tienda</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-info">
+          <h4 class="footer-heading">Contacto</h4>
+          <ul class="footer-contact-list">
+            <li>📍 Av. Corrientes 1234, CABA</li>
+            <li>📞 <a href="https://wa.me/5491100000000" rel="noopener">+54 9 11 0000-0000</a></li>
+            <li>📧 <a href="mailto:info@tattoostudio.com">info@tattoostudio.com</a></li>
+          </ul>
+          <h4 class="footer-heading" style="margin-top:1.5rem">Horarios</h4>
+          <ul class="footer-contact-list">
+            <li>Lun–Vie: 10:00–20:00</li>
+            <li>Sábados: 11:00–18:00</li>
+            <li>Domingos: Cerrado</li>
+          </ul>
+        </div>
+
+        <div class="footer-legal">
+          <h4 class="footer-heading">Legal</h4>
+          <p>Los precios mostrados son orientativos y pueden variar según diseño y zona del cuerpo. Reservamos el derecho de admisión.</p>
+          <p style="margin-top:0.75rem">Al usar este sitio aceptás nuestra <a href="#" class="link-gold">política de privacidad</a>.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 TattooStudio. Todos los derechos reservados.</p>
+        <p>Diseñado con ♥ en Buenos Aires</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/hero.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

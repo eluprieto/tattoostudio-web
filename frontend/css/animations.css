@@ -1,0 +1,126 @@
+/* ================================================================
+   TATTOOSTUDIO – ANIMATIONS CSS
+   ================================================================ */
+
+/* ── Reveal on scroll ───────────────────────────────────────────── */
+.reveal,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+              transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.reveal         { transform: translateY(32px); }
+.reveal-left    { transform: translateX(-40px); }
+.reveal-right   { transform: translateX(40px); }
+
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Stagger delays for grid children */
+.services-grid .service-card:nth-child(1) { transition-delay: 0.05s; }
+.services-grid .service-card:nth-child(2) { transition-delay: 0.12s; }
+.services-grid .service-card:nth-child(3) { transition-delay: 0.19s; }
+.services-grid .service-card:nth-child(4) { transition-delay: 0.26s; }
+.services-grid .service-card:nth-child(5) { transition-delay: 0.33s; }
+.services-grid .service-card:nth-child(6) { transition-delay: 0.40s; }
+
+.pricing-grid .pricing-card:nth-child(1) { transition-delay: 0.05s; }
+.pricing-grid .pricing-card:nth-child(2) { transition-delay: 0.15s; }
+.pricing-grid .pricing-card:nth-child(3) { transition-delay: 0.25s; }
+
+/* ── Gold shimmer on border ─────────────────────────────────────── */
+@keyframes borderGlow {
+  0%   { box-shadow: 0 0 0 rgba(201,168,76,0); }
+  50%  { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+  100% { box-shadow: 0 0 0 rgba(201,168,76,0); }
+}
+.pricing-featured { animation: borderGlow 3s ease-in-out infinite; }
+
+/* ── Pulse ring ─────────────────────────────────────────────────── */
+@keyframes pulseRing {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.pulse-ring {
+  position: absolute;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  animation: pulseRing 2s ease-out infinite;
+}
+
+/* ── Slide-in from top (toast/notification) ─────────────────────── */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+.toast {
+  animation: slideDown 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* ── Button loading spinner ─────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.btn-loading::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-top-color: rgba(0,0,0,0.8);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+/* ── Skeleton loader ────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius);
+}
+
+/* ── Number counter animation ───────────────────────────────────── */
+.stat-number { transition: color 0.3s; }
+
+/* ── Gallery item entrance ──────────────────────────────────────── */
+.gallery-item {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.4s ease, transform 0.4s ease,
+              border-color 0.3s ease;
+}
+.gallery-item.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Hero GSAP targets (initial state set inline by GSAP) ───────── */
+/* nothing needed here – GSAP sets from:{ opacity:0 } directly */
+
+/* ── prefers-reduced-motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .particle,
+  .pulse-ring,
+  .skeleton,
+  .pricing-featured,
+  .scroll-line { animation: none; }
+  .gallery-item { opacity: 1; transform: none; transition: none; }
+}

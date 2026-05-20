@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pago exitoso | TattooStudio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/shop.css" />
+</head>
+<body>
+  <div class="payment-result">
+    <div class="payment-result-card">
+      <span class="payment-result-icon">✅</span>
+      <h2>¡Pago exitoso!</h2>
+      <p>Tu pedido fue confirmado. Vas a recibir un email con el detalle y la información de envío en los próximos minutos.</p>
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem">
+        <a href="shop.html"         class="btn-gold btn-full">Seguir comprando</a>
+        <a href="../index.html"     class="btn-outline-gold btn-full">Volver al inicio</a>
+      </div>
+      <p style="margin-top:1.5rem;font-size:.8rem">¿Dudas? Escribinos a
+        <a href="mailto:info@tattoostudio.com" class="link-gold">info@tattoostudio.com</a>
+      </p>
+    </div>
+  </div>
+  <script>
+    // Limpiar el carrito al llegar aquí
+    try { localStorage.removeItem('ts_cart'); } catch {}
+  </script>
+</body>
+</html>

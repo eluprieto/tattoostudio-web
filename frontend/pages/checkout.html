@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar compra | TattooStudio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/shop.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body style="padding-top:0">
+
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+          <text x="0" y="36" class="logo-text-main">TATTOO</text>
+          <text x="2" y="48" class="logo-text-sub">STUDIO</text>
+        </svg>
+      </a>
+      <ul class="nav-links"><li><a href="shop.html" class="nav-link">← Volver a la tienda</a></li></ul>
+    </div>
+  </nav>
+
+  <section class="checkout-section section">
+    <div class="container">
+      <p class="section-eyebrow">Paso final</p>
+      <h1 class="section-title" style="margin-bottom:2rem">Finalizar compra</h1>
+
+      <div id="cart-empty-msg" style="display:none;text-align:center;padding:4rem 0">
+        <p style="font-size:1.1rem;margin-bottom:1.5rem">Tu carrito está vacío.</p>
+        <a href="shop.html" class="btn-gold">Ir a la tienda</a>
+      </div>
+
+      <div class="checkout-grid" id="checkout-content">
+        <!-- Formulario de datos -->
+        <div class="checkout-form-wrap">
+          <h2 class="checkout-form-title">Datos de envío</h2>
+          <form id="checkout-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ch-name">Nombre</label>
+                <input type="text" id="ch-name" name="firstName" placeholder="Nombre" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="ch-lastname">Apellido</label>
+                <input type="text" id="ch-lastname" name="lastName" placeholder="Apellido" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ch-email">Email</label>
+              <input type="email" id="ch-email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="ch-phone">Teléfono</label>
+              <input type="tel" id="ch-phone" name="phone" placeholder="+54 9 11 0000-0000" required autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="ch-address">Dirección</label>
+              <input type="text" id="ch-address" name="address" placeholder="Calle y número" required autocomplete="street-address" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ch-city">Ciudad</label>
+                <input type="text" id="ch-city" name="city" placeholder="Ciudad" required autocomplete="address-level2" />
+              </div>
+              <div class="form-group">
+                <label for="ch-zip">Código postal</label>
+                <input type="text" id="ch-zip" name="zipCode" placeholder="CP" required autocomplete="postal-code" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ch-province">Provincia</label>
+              <select id="ch-province" name="province" required>
+                <option value="">Seleccionar provincia...</option>
+                <option>Buenos Aires</option>
+                <option>CABA</option>
+                <option>Córdoba</option>
+                <option>Santa Fe</option>
+                <option>Mendoza</option>
+                <option>Tucumán</option>
+                <option>Salta</option>
+                <option>Entre Ríos</option>
+                <option>Misiones</option>
+                <option>Chaco</option>
+                <option>Corrientes</option>
+                <option>Santiago del Estero</option>
+                <option>San Juan</option>
+                <option>Jujuy</option>
+                <option>Río Negro</option>
+                <option>Neuquén</option>
+                <option>Formosa</option>
+                <option>Chubut</option>
+                <option>San Luis</option>
+                <option>Catamarca</option>
+                <option>La Rioja</option>
+                <option>La Pampa</option>
+                <option>Santa Cruz</option>
+                <option>Tierra del Fuego</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ch-notes">Notas del pedido (opcional)</label>
+              <textarea id="ch-notes" name="notes" rows="2" placeholder="Instrucciones especiales de entrega..."></textarea>
+            </div>
+
+            <p id="checkout-error" style="color:#f87171;font-size:.85rem;margin-bottom:.75rem;display:none"></p>
+            <button type="submit" class="btn-gold btn-full" id="checkout-submit-btn">
+              Ir a pagar con Mercado Pago
+            </button>
+            <p style="text-align:center;font-size:.75rem;color:var(--text-dim);margin-top:.75rem">
+              Serás redirigido al sitio seguro de Mercado Pago para completar el pago.
+            </p>
+          </form>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="order-summary-wrap">
+          <h3 class="order-summary-title">Tu pedido</h3>
+          <div id="order-items-list"></div>
+          <div class="order-total-row">
+            <span class="order-total-label">Total</span>
+            <span class="order-total-value" id="order-total">$0</span>
+          </div>
+          <p style="font-size:.75rem;color:var(--text-dim);margin-top:.75rem">
+            El costo de envío se incluye en el total.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items    = Cart.getItems();
+      const listEl   = document.getElementById('order-items-list');
+      const totalEl  = document.getElementById('order-total');
+      const emptyMsg = document.getElementById('cart-empty-msg');
+      const content  = document.getElementById('checkout-content');
+
+      if (Cart.isEmpty()) {
+        emptyMsg.style.display = 'block';
+        content.style.display  = 'none';
+        return;
+      }
+
+      const shipping  = parseInt(localStorage.getItem('ts_shipping_cost') || '1500', 10);
+      const freeFrom  = parseInt(localStorage.getItem('ts_free_shipping')  || '15000', 10);
+      const subtotal  = Cart.getTotal();
+      const shipCost  = subtotal >= freeFrom ? 0 : shipping;
+      const total     = subtotal + shipCost;
+
+      listEl.innerHTML = items.map(i => `
+        <div class="order-item">
+          <span class="order-item-name">${Utils.sanitize(i.name)} × ${i.qty}</span>
+          <span class="order-item-price">${Utils.formatPrice(i.price * i.qty)}</span>
+        </div>
+      `).join('') + `
+        <div class="order-item">
+          <span class="order-item-name">Envío</span>
+          <span class="order-item-price">${shipCost === 0 ? 'Gratis' : Utils.formatPrice(shipCost)}</span>
+        </div>
+      `;
+
+      totalEl.textContent = Utils.formatPrice(total);
+
+      // Pre-fill form if logged in
+      const user = Auth.getUser();
+      if (user) {
+        const emailInput = document.getElementById('ch-email');
+        const nameInput  = document.getElementById('ch-name');
+        if (emailInput) emailInput.value = user.email || '';
+        if (nameInput)  nameInput.value  = (user.name || '').split(' ')[0];
+      }
+
+      // Checkout submit → call backend → redirect to MP
+      document.getElementById('checkout-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        if (!Utils.validateForm(form)) return;
+
+        const btn = document.getElementById('checkout-submit-btn');
+        const err = document.getElementById('checkout-error');
+        btn.disabled = true;
+        btn.classList.add('btn-loading');
+        btn.textContent = 'Generando pago...';
+        err.style.display = 'none';
+
+        const formData = Object.fromEntries(new FormData(form));
+        const payload = {
+          items: items.map(i => ({ id: i.id, name: i.name, quantity: i.qty, unit_price: i.price })),
+          shipping: { cost: shipCost },
+          buyer: formData
+        };
+
+        try {
+          const { init_point } = await Utils.fetchJSON(`${API_BASE}/payments/create-preference`, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+          window.location.href = init_point;
+        } catch (error) {
+          err.textContent = error.message || 'No se pudo iniciar el pago. Intentá de nuevo o contactanos.';
+          err.style.display = 'block';
+          btn.disabled = false;
+          btn.classList.remove('btn-loading');
+          btn.textContent = 'Ir a pagar con Mercado Pago';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
